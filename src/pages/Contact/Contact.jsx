@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Contact.css'
 const Contact = () => {
-  return (
-    <div>Contact</div>
+  return(
+    <div className="contact-container">
+      <h1>The component is under Development</h1>
+    </div>
   )
 }
 

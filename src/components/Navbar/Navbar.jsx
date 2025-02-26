@@ -1,9 +1,17 @@
 import React from 'react'
 import './Navbar.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { SiReactiveresume } from "react-icons/si";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  
+  const onLogoutClick = ()=>{
+      let userData = JSON.parse(localStorage.getItem('user'));
+      localStorage.setItem('user', JSON.stringify({...userData, isLogin: false}));
+      navigate('/login')
+  }
+
   return (
     <div className='navbar-container'>
         <div className="logo">
@@ -17,7 +25,7 @@ const Navbar = () => {
             <li><Link to={'/contact'}>Contact</Link></li>
         </ul>
         <div className="log-out">
-            <button>Logout</button>
+            <button onClick={onLogoutClick}>Logout</button>
         </div>
     </div>
   )

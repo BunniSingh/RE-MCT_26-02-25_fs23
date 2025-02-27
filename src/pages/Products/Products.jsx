@@ -31,7 +31,7 @@ const Products = () => {
     useEffect(() => {
         fetchProduts()
     }, [selectedCategory])
-    // console.log(product)
+    
   return (
     <div className="produts-container">
         {isVisible && <ProductCard {...product} setIsVisible = {setIsVisible}/>}

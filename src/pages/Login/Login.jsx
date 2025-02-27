@@ -3,6 +3,8 @@ import "./Login.css"
 import image from '../../assets/login-image.jpg'
 import { FaGoogle } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
+import { signInWithPopup } from 'firebase/auth';
+import { auth, googleAuthProvider } from '../../firebase';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -48,8 +50,20 @@ const Login = () => {
     navigate('/');
   }
 
-  let onGoogleBtnClick = () =>{
-
+  let onGoogleBtnClick =  async() =>{
+    try{
+      const responce = await signInWithPopup(auth, googleAuthProvider);
+      let {displayName, email} = responce._tokenResponse;
+      localStorage.setItem("user" , JSON.stringify({
+        name: displayName,
+        email: email,
+        password: null,
+        isLogin: true
+      }))
+      navigate('/');
+    }catch(err){
+      console.log("Error while login with google popup: ", err);
+    }
   }
 
   return (
